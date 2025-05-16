@@ -5,11 +5,10 @@ import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class UserController {
-  constructor(private readonly usersService: UsersClientService) {}
+  constructor(private readonly usersService: UsersClientService) { }
+
   @MessagePattern('users')
-  async getHello(): Promise<{ id: number; username: string }[]> {
-    const usersObservable = this.usersService.getUsers();
-    const users = await lastValueFrom(await usersObservable) as { id: number; username: string }[];
-    return users;
+   getHello() {
+    return  this.usersService.getUsers();
   }
 }

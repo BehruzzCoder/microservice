@@ -14,6 +14,6 @@ async function bootstrap() {
     },
   );
   await app.listen();
-  console.log('User service is running on port 4002');
+  console.log('User service is running on port 4003');
 }
 bootstrap();

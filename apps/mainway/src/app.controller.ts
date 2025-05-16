@@ -10,12 +10,12 @@ export class AppController {
   @ApiTags('Products 🛍️')
   @Get('/product')
   async getProducts() {
-    return await this.productClient.send( 'products', {});
+    return await this.productClient.send('products', {});
   }
 
   @ApiTags('Users 👤')
   @Get('/users')
   async getUsers() {
-    return await this.userClient.send('users' , {});
+    return await this.userClient.send('users', {});
   }
 }
