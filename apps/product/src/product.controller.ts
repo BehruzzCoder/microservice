@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
-import { ProductService } from './product.service';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
+import { ProductsService } from './product.service';
+
 
 @Controller()
-export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+export class ProductsController {
+  constructor(private readonly productsService: ProductsService) {}
 
-  @Get()
-  getHello(): string {
-    return this.productService.getHello();
+  @MessagePattern({ cmd: 'get_products' })
+  getProducts() {
+    return this.productsService.getProducts();
   }
 }

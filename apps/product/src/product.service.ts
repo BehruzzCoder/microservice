@@ -1,8 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 
-@Injectable()
-export class ProductService {
-  getHello(): string {
-    return 'Hello World!';
+@Controller()
+export class ProductsService {
+  @MessagePattern('get_products') 
+  getProducts() {
+    return [
+      { id: 1, name: 'iPhone', price: 1000 },
+      { id: 2, name: 'MacBook', price: 2000 },
+    ];
   }
 }
