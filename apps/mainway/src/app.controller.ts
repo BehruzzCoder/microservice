@@ -1,36 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { ClientProxy, Client, Transport } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
-  @Client({
-    transport: Transport.TCP,
-    options: {
-      host: '127.0.0.1',
-      port: 4001,
-    },
-  })
-  private readonly productClient: ClientProxy;
-
-  @Client({
-    transport: Transport.TCP,
-    options: {
-      host: '127.0.0.1',
-      port: 4002,
-    },
-  })
-  private readonly userClient: ClientProxy;
+  constructor(@Inject('PRODUCT_SERVICE') private readonly productClient: ClientProxy,
+    @Inject('USER_SERVICE') private readonly userClient: ClientProxy) { }
 
   @ApiTags('Products 🛍️')
-  @Get('/products')
+  @Get('/product')
   async getProducts() {
-    return this.productClient.send({ cmd: 'get_products' }, {});
+    return await this.productClient.send( 'products', {});
   }
 
   @ApiTags('Users 👤')
   @Get('/users')
   async getUsers() {
-    return this.userClient.send({ cmd: 'get_users' }, {});
+    return await this.userClient.send('users' , {});
   }
 }

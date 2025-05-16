@@ -3,7 +3,7 @@ import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class ProductsService {
-  @MessagePattern('get_products') 
+  @MessagePattern('products') 
   getProducts() {
     return [
       { id: 1, name: 'iPhone', price: 1000 },

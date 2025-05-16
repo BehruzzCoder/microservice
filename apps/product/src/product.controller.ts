@@ -7,7 +7,7 @@ import { ProductsService } from './product.service';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @MessagePattern({ cmd: 'get_products' })
+  @MessagePattern('products')
   getProducts() {
     return this.productsService.getProducts();
   }
